@@ -1,0 +1,22 @@
+/* Global settings */
+body {
+    margin: 62px;
+}
+
+li {
+    list-style-type: none;
+}
+
+/* Header */
+.section-header__heading {
+    color: #4a4a4a;
+    font-size: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Employee list */
+.employees-list {    
+    float: left;
+    width: 33%;
+}

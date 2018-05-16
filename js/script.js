@@ -54,7 +54,7 @@ request.onreadystatechange = function(event) {
                 </li>`;
                 
                 // Every four <li> we close the unordonned list and open a new one, so we got three columns at the ending
-                if(i % 4 === 0 ) {
+                if(i % 4 === 3 ) {
                     employeesDirectoryHTML += '</ul><ul class="employees-list">';
                 }
             }
