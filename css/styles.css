@@ -1,22 +1,197 @@
-/* Global settings */
+/* CSS variables */
+:root {
+    --dark-gray: #4a4a4a;
+    --lighter-gray: #979c9f;
+    --lightest-gray: #dfdfdf;
+}
+
+/* Global styles */
+
+body, 
+html {
+    height: 100%;
+}
+
 body {
-    margin: 62px;
+    color: var(--dark-gray);
+    margin: 3.875rem;
+}
+
+main {
+    margin: 0 auto;
+    width: 1300px;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
 }
 
 li {
     list-style-type: none;
 }
 
-/* Header */
+a {
+    color: var(--dark-gray);
+    text-decoration: none;
+}
+
+button {
+    border: 0;
+    background: none;
+}
+
+/* Modal styles */
+.modal-container {
+    background-color: rgba(0,0,0, 0.5);
+    height: 100%;
+    position: fixed;
+    transition: all 15s ease;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.modal {
+    background-color: #fff;
+    border: 0.125rem solid var(--lightest-gray);
+    border-radius: 0.5rem;        
+    left:0;
+    margin: 0 auto;
+    padding: 3.063rem  2.5rem;
+    position: absolute;    
+    right:0;
+    text-align: center;
+    top: 20%;
+    width: 21rem;
+}
+
+.btn-close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+.modal .employee-card__figure {
+    height: 10.125rem;
+    width: 10.125rem;
+}
+
+.modal .employee-card__paragraph:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+/* Modal animation */
+.modal-in .modal-container {
+    -webkit-animation: opacity-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: opacity-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.modal-out .modal-container {
+    -webkit-animation: opacity-out 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: opacity-out 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+ @-webkit-keyframes opacity-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes opacity-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes opacity-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes opacity-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+/* Helper classes */
+.grid-container {
+    display: grid;
+}
+
+.hr-divider {
+    border: 1px solid var(--lightest-gray);
+    margin: 2rem 0;
+}
+
+/* Section styles */
+.section-employees {
+    grid-column-gap: 2.5rem;
+    grid-template-columns: auto auto auto;
+}
+
 .section-header__heading {
-    color: #4a4a4a;
-    font-size: 20px;
-    letter-spacing: 1px;
+    color: var(--dark-gray);
+    font-size: 1.25rem;
+    letter-spacing: 0.063rem;
+    margin-bottom: 2.5rem;
     text-transform: uppercase;
 }
 
-/* Employee list */
-.employees-list {    
-    float: left;
-    width: 33%;
+/* Employees card styles */
+.employee-card:not(.modal) {
+    border: 0.125rem solid var(--lightest-gray);
+    border-radius: 0.5rem;
+    margin-bottom: 2.5rem;
+    height: 11.438rem;
+    max-width: 25.75rem;
+}
+
+.employee-card__link {
+    display: block;
+    padding: 1.625rem;
+}
+
+.employee-card__article {
+    grid-template-columns: auto auto;
+}
+
+.employee-card__figure {
+    border-radius: 50%;
+    display: inline-block;
+    height: 7.875rem;
+    margin: 0 1.25rem 0 0;
+    overflow: hidden;
+    width: 7.875rem;
+}
+
+.employee-card__image {
+    height: auto;
+    width: 100%;
+}
+
+.employee-card__heading {
+    font-size: 1.375rem;
+    margin: 1rem 0 0.75rem 0;
+}
+
+.employee-card__paragraph {
+    color: var(--lighter-gray);
+    margin:0 0 0.5rem 0;
+}
+
+.employee-card__paragraph:last-child {
+    margin-bottom: 0;
 }

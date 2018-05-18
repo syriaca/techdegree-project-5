@@ -1,6 +1,6 @@
 let modalObjArray = [];
 let modalObj = {};
-let modalDiv = document.createElement('div');
+let modalContainer = document.createElement('div');
 
 // Constructor for the modal
 function Modal(employees){
@@ -15,42 +15,38 @@ Modal.prototype.add = function(employee) {
 
 // Method using arrays of object above to construct html for the modal
 Modal.prototype.constructModal = function(employee) {
-    modalHTML = `<div class="employee-modal">
+    modalHTML = `<div class="modal employee-card">
     <button id="btnCloseModal" class="btn-close">&#10060;</button>
-        <figure class="employee-modal__figure">
-            <img class="employee-modal__image" src="${employee.picture}"/>
+        <figure class="employee-card__figure">
+            <img class="employee-card__image" src="${employee.picture}" alt="${employee.firstName} ${employee.lastName}'s portrait photography"/>
         </figure>
-        <header class="employees-modal__header">
-            <h1 class="employees-modal__heading employee__name">
+        <div class="employee-card__body">
+            <h1 class="employee-card__heading employee__name">
                 <span class="employee__name-first">${employee.firstName}</span>
                 <span class="employee__name-last">${employee.lastName}</span>
             </h1>
-            <p class="employees-modal__paragraph employee__email">${employee.email}</p>
-            <p class="employees-modal__paragraph employee__cell">${employee.cell}</p>
-            <p class="employees-modal__paragraph employee__location">
-                ${employee.location.street}, ${employee.location.city} ${employee.location.state} ${employee.location.postcode}
-            </p>
-            <p class="employees-modal__paragraph employee__dob">${employee.dob}</p>
+                <p class="employee-card__paragraph employee__email">${employee.email}</p>
+                <p class="employee-card__paragraph employee__location">${employee.location.city}</p>
+                <hr class="hr-divider">
+                <p class="employee-card__paragraph employee__cell">${employee.cell}</p>
+                <p class="employee-card__paragraph employee__location">${employee.location.street}, ${employee.location.state} ${employee.location.postcode}</p>
+                <p class="employee-card__paragraph employee__dob">Birthday: ${employee.dob}</p>
         </header>
     </div>`;
 }
 
 // Method to show the modal
 Modal.prototype.showModal = function() {
-    modalDiv.setAttribute('id','modalDiv');
-    document.body.appendChild(modalDiv);
-    modalDiv.innerHTML = modalHTML;
+    modalContainer.setAttribute('id','modalContainer');
+    modalContainer.setAttribute('class','modal-container');
+    document.body.appendChild(modalContainer);
+    modalContainer.innerHTML = modalHTML;
     document.getElementById('btnCloseModal').addEventListener('click', function(e){
-        this.parentNode.remove();
+        document.body.classList.add("class", "modal-out");
+        document.body.classList.remove("modal-in");
+        setTimeout(function(){
+            document.body.removeAttribute("class", "modal-out");
+            e.target.parentElement.parentElement.remove();
+        },500);
     });
 };
-
-function Employee(picture, firstName, lastName, email, cell, location, dob) {
-    this.picture = picture;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.cell = cell;
-    this.location = location;
-    this.dob = dob;
-}

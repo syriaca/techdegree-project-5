@@ -10,8 +10,8 @@ request.onreadystatechange = function(event) {
     // If the request is done
     if (this.readyState === XMLHttpRequest.DONE) {
         let employeesDirectoryHTMLHeading = this.status === 200  ? 'Awesome employee startup directory' : 'No result founded';
-        let employeesDirectoryHTML = '<section class="section">';
-        employeesDirectoryHTML += '<header class="section-header"><h1 class="section-header__heading">'+employeesDirectoryHTMLHeading+'</h1></header>';
+        let employeesDirectoryHTML = '<header class="section-header"><h1 class="section-header__heading">'+employeesDirectoryHTMLHeading+'</h1></header>';
+        employeesDirectoryHTML += '<section class="section section-employees grid-container">';
         // If the request is successfull
         if (this.status === 200) {
             // We get the employee data response and play with it
@@ -35,19 +35,19 @@ request.onreadystatechange = function(event) {
 
                 // We create the employee HTML list to display it on page
                 employeesDirectoryHTML += 
-                `<li class="employees-list__item">
-                    <a href="#" class="employees-list__link">
-                        <article class="employees-list__article">
-                            <figure class="employees-list__figure">
-                                <img class="employees-list__image" src="${employeePicture}"/>
+                `<li class="employees-list__item employee-card">
+                    <a href="#" class="employee-card__link">
+                        <article class="employee-card__article grid-container">
+                            <figure class="employee-card__figure">
+                                <img class="employee-card__image" src="${employeePicture}" alt="${employee.firstName} ${employee.lastName}'s portrait photography"/>
                             </figure>
-                            <header class="employees-list__header">
-                                <h1 class="employees-list__heading employee__name">
+                            <div class="employee-card__body">
+                                <h1 class="employee-card__heading employee__name">
                                     <span class="employee__name-first">${employeeFirstName}</span>
                                     <span class="employee__name-last">${employeeLastName}</span>
                                 </h1>
-                                <p class="employees-list__paragraph employee__email">${employeeEmail}</p>
-                                <p class="employees-list__paragraph employee__city">${employeeCity}</p>
+                                <p class="employee-card__paragraph employee__email">${employeeEmail}</p>
+                                <p class="employee-card__paragraph employee__city">${employeeCity}</p>
                             </header>
                         </article>
                     </a>
@@ -62,10 +62,11 @@ request.onreadystatechange = function(event) {
             employeeDirectory.innerHTML = employeesDirectoryHTML;
 
             // get all links in list and add event listener in order to add a modal window
-            let employeesModalLink = document.querySelectorAll(".employees-list__link");
+            let employeesModalLink = document.querySelectorAll(".employee-card__link");
             for(let i = 0; i < employeesModalLink.length; i++) {
                 employeesModalLink[i].addEventListener('click', function(e) {
                     e.preventDefault();
+                    document.body.setAttribute("class", "modal-in");
                     employeeModal.constructModal(employeeModal.employees[i]);
                     employeeModal.showModal(modalHTML);
                 });
